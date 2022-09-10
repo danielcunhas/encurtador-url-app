@@ -11,7 +11,7 @@ function App() {
   const [urlDados, setUrlDados] = useState('')
   const [codigo, setCodigo] = useState('')
   const [escondido, setEscondido] = useState(true)
-  const baseUrl = 'http://localhost:3000'
+  const baseUrl = 'https://dclrs.herokuapp.com'
   
   
   const copyToClipboard = () => {
