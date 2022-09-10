@@ -11,7 +11,7 @@ function App() {
   const [urlDados, setUrlDados] = useState('')
   const [codigo, setCodigo] = useState('')
   const [escondido, setEscondido] = useState(true)
-  const baseUrl = 'http://localhost:3000'
+  const baseUrl = 'https://dclrs.herokuapp.com'
   
   
   const copyToClipboard = () => {
@@ -37,19 +37,23 @@ function App() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ url: url })
-    };
-    const resultado = await fetch(`${baseUrl}/encurtador`, requestOptions)
-        .then(response => response.json())
-        .then(data => data);
+    if (url.includes('https://') || url.includes('http://')){
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: url })
+      };
+      const resultado = await fetch(`${baseUrl}/encurtador`, requestOptions)
+          .then(response => response.json())
+          .then(data => data);
+      console.log(resultado)
+      setUrlFinal(baseUrl + '/' + resultado.code)
 
-    console.log(resultado)
-    
-   
-    setUrlFinal(baseUrl + '/' + resultado.code)
+      
+    } 
+    else{
+      alert('Insira uma url com http ou https')
+    }
     
   
     }
